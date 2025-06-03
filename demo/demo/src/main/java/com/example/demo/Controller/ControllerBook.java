@@ -1,6 +1,6 @@
 package com.example.demo.Controller;
 
-import DTO.BookDTO;
+import com.example.demo.DTO.BookDTO;
 import com.example.demo.ModelsEntity.Book;
 import com.example.demo.Service.ServiceBook;
 import org.springframework.beans.factory.annotation.Autowired;
