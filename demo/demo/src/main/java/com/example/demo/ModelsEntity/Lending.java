@@ -13,8 +13,6 @@ public class Lending {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String customerId;
-    private Integer bookId;
     private LocalDate lendingDate;
     private boolean returned;
 
@@ -26,12 +24,11 @@ public class Lending {
     @JoinColumn(name = "book_id")
     private Book book;
 
-
-    public Lending(String customerId, Integer bookId, LocalDate lendingDate, boolean returned) {
-        this.customerId = customerId;
-        this.bookId = bookId;
+    public Lending(Customer customer, Book book, LocalDate lendingDate, boolean returned) {
         this.lendingDate = lendingDate;
         this.returned = returned;
+        this.book=book;
+        this.customer=customer;
     }
 
     public Lending() { }
@@ -40,13 +37,6 @@ public class Lending {
         this.id = id;
     }
 
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
-    }
-
-    public void setBookId(Integer bookId) {
-        this.bookId = bookId;
-    }
 
     public void setLendingDate(LocalDate lendingDate) {
         this.lendingDate = lendingDate;
@@ -60,13 +50,6 @@ public class Lending {
         return id;
     }
 
-    public String getCustomerId() {
-        return customerId;
-    }
-
-    public Integer getBookId() {
-        return bookId;
-    }
 
     public LocalDate getLendingDate() {
         return lendingDate;
@@ -74,5 +57,21 @@ public class Lending {
 
     public boolean isReturned() {
         return returned;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
+
+    public Book getBook() {
+        return book;
     }
 }

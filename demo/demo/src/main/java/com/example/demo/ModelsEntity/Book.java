@@ -16,7 +16,7 @@ public class Book {
     private String bookName;
     private LocalDate publishDate;
 
-    @OneToMany (mappedBy = "lendings")
+    @OneToMany (mappedBy = "book")
     List<Lending> lendingList;
 
     @Version

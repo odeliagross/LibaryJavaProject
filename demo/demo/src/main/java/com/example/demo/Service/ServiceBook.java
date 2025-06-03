@@ -65,7 +65,7 @@ public class ServiceBook{
             return false;
         Book foundBook=OptBook.get();
         foundBook.setBookName(book.getBookName());
-        rep.save(book);
+        rep.save(foundBook);
         return true;
     }
 
@@ -86,6 +86,7 @@ public class ServiceBook{
         );
         for(Book book:((List<Book>)rep.findAll()))
         {
+            if(book.getPublishDate()!=null)
             if(book.getPublishDate().getYear()==(year))
                 found.add(mapToDTO(book));
         }

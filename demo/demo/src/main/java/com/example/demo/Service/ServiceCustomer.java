@@ -16,9 +16,10 @@ public class ServiceCustomer {
     @Autowired
     public ServiceCustomer(RepCostumer rep){this.rep=rep;}
 
+    //שליפת כל הלקוחות
     public List<Customer> findAll() {return (List<Customer>) rep.findAll();}
 
-
+    //הוספת לקוח
     public boolean addCustomer(Customer customer)
     {
         if(customer.getId()==null)
@@ -34,6 +35,7 @@ public class ServiceCustomer {
         return true;
     }
 
+    //קבלת לקוח לפי תעודת זהות
     public Customer getCustomerById(String id)
     {
         for(Customer cos:(List<Customer>) rep.findAll())
