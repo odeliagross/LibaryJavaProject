@@ -2,12 +2,18 @@ package com.example.demo.Service;
 
 import com.example.demo.DTO.BookDTO;
 import com.example.demo.DTO.CustomerDTO;
+import com.example.demo.DTO.LendingDTO;
 import com.example.demo.ModelsEntity.Book;
 import com.example.demo.ModelsEntity.Customer;
+import com.example.demo.ModelsEntity.Lending;
+import com.example.demo.Repository.RepBook;
 import com.example.demo.Repository.RepCostumer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -59,6 +65,20 @@ public class ServiceCustomer {
         dto.setFirstName(customer.getFirstName());
         dto.setLastName(customer.getLastName());
         dto.setPhone(customer.getPhone());
+        List<LendingDTO> lendings = new ArrayList<LendingDTO>();
+        if (customer.getLendingList() != null) {
+            for (Lending lending : customer.getLendingList()) {
+                if (lending.getBook() != null) {
+                    LendingDTO ld=new LendingDTO();
+                    ld.setCustomerId(lending.getCustomer().getId());
+                    ld.setReturned(lending.isReturned());
+                    ld.setBookId(lending.getBookId());
+                    ld.setLendingDate(lending.getLendingDate());
+                    lendings.add(ld);
+                }
+            }
+        }
+        dto.setLendingList(lendings);
         return dto;
     }
 

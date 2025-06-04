@@ -33,12 +33,12 @@ public class ServiceBook{
             return false;
         if(b.getAuthorId().length()!=9)
             return false;
-        for (Book book : (List<Book>) rep.findAll()) {
-            if(book.getBookName().equals(b.getBookName()))
-                if(!book.getPublishDate().equals(b.getPublishDate()) ||
-                        !book.getAuthorId().equals(b.getAuthorId()))
-                    return false;
-        }
+//        for (Book book : (List<Book>) rep.findAll()) {
+//            if(book.getBookName().equals(b.getBookName()))
+//                if(!book.getPublishDate().equals(b.getPublishDate()) ||
+//                        !book.getAuthorId().equals(b.getAuthorId()))
+//                    return false;
+//        }
         b.setId(null);
         rep.save(b);
         return true;

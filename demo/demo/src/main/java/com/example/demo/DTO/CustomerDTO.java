@@ -3,6 +3,7 @@ package com.example.demo.DTO;
 import com.example.demo.ModelsEntity.Lending;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 import java.util.HashMap;
 import java.util.List;
@@ -12,11 +13,12 @@ public class CustomerDTO {
     private String firstName;
     private String lastName;
     private String phone;
-    HashMap<String,Boolean> lendingList;
+    private List<LendingDTO> lendingList;
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
+
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
@@ -26,9 +28,7 @@ public class CustomerDTO {
         this.phone = phone;
     }
 
-    public void setLendingList(HashMap<String, Boolean> lendingList) {
-        this.lendingList = lendingList;
-    }
+
 
     public String getLastName() {
         return lastName;
@@ -42,11 +42,15 @@ public class CustomerDTO {
         return phone;
     }
 
-    public HashMap<String, Boolean> getLendingList() {
+    public List<LendingDTO> getLendingList() {
         return lendingList;
     }
 
-    public CustomerDTO(String firstName, String lastName, String phone, HashMap<String, Boolean> lendingList) {
+    public void setLendingList(List<LendingDTO> lendingList) {
+        this.lendingList = lendingList;
+    }
+
+    public CustomerDTO(String firstName, String lastName, String phone, List<LendingDTO> lendingList) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;

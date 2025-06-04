@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.chrono.IsoEra;
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000") // או 5173, תלוי בפורט של הקליינט שלך
 @RestController
 public class ControllerLending {
 

@@ -19,7 +19,9 @@ public class Customer {
     private String phone;
 
     @OneToMany(mappedBy = "customer")
-    List<Lending> lendingList;
+    private List<Lending> lendingList;
+
+
 
     public Customer(){}
 
@@ -28,6 +30,13 @@ public class Customer {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;
+    }
+    public List<Lending> getLendingList() {
+        return lendingList;
+    }
+
+    public void setLendingList(List<Lending> lendingList) {
+        this.lendingList = lendingList;
     }
 
     public void setId(String id) {
