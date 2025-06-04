@@ -52,4 +52,6 @@ public class CustomerDTO {
         this.phone = phone;
         this.lendingList = lendingList;
     }
+
+    public CustomerDTO(){}
 }

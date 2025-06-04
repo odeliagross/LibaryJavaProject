@@ -2,6 +2,7 @@ package com.example.demo.Service;
 
 import com.example.demo.DTO.BookDTO;
 import com.example.demo.ModelsEntity.Book;
+import com.example.demo.ModelsEntity.Lending;
 import com.example.demo.Repository.RepBook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,9 +20,10 @@ public class ServiceBook{
     @Autowired
     public ServiceBook(RepBook rep){this.rep=rep;}
 
-    public List<Book> findAll()
-    {
-        return (List<Book>)rep.findAll();
+    public List<BookDTO> findAll() {
+        return ((List<Book>) rep.findAll()).stream()
+                .map(this::mapToDTO)
+                .toList();
     }
 
 
@@ -37,6 +39,7 @@ public class ServiceBook{
                         !book.getAuthorId().equals(b.getAuthorId()))
                     return false;
         }
+        b.setId(null);
         rep.save(b);
         return true;
     }
@@ -49,21 +52,21 @@ public class ServiceBook{
         return true;
     }
 
-    public Book findById(Integer id)
+    public BookDTO findById(Integer id)
     {
         for (Book book : (List<Book>) rep.findAll()) {
             if (book.getId().equals(id))
-                return book;
+                return mapToDTO(book);
         }
         return null;
     }
 
     public boolean update(Integer id, Book book)
     {
-        Optional<Book> OptBook = rep.findById(id);
-        if(OptBook.isEmpty())
+        Optional<Book> optBook = rep.findById(id);
+        if(optBook.isEmpty())
             return false;
-        Book foundBook=OptBook.get();
+        Book foundBook=optBook.get();
         foundBook.setBookName(book.getBookName());
         rep.save(foundBook);
         return true;
@@ -93,12 +96,23 @@ public class ServiceBook{
         return found;
     }
 
+    //מיפוי
     private BookDTO mapToDTO(Book book) {
         BookDTO dto = new BookDTO();
         dto.setBookName(book.getBookName());
         dto.setPublishDate(book.getPublishDate());
+        List<LocalDate> lendingDates = new ArrayList<>();
+        if (book.getLendingList() != null) {
+            dto.setLendingList(
+                    book.getLendingList().stream()
+                            .map(Lending::getLendingDate)
+                            .filter(ld -> ld != null)
+                            .toList());
+        } else {
+            dto.setLendingList(new ArrayList<>());}
         return dto;
     }
 
 
 }
+

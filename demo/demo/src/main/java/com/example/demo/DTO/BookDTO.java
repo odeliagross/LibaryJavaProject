@@ -1,18 +1,19 @@
 package com.example.demo.DTO;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class BookDTO {
 
     private String bookName;
     private LocalDate publishDate;
-    List<LocalDate> lendingList;
+    private List<LocalDate> lendingList;
 
-    public BookDTO(String bookName, LocalDate publishDate, List<LocalDate> lendingList) {
+    public BookDTO(String bookName, LocalDate publishDate) {
         this.bookName = bookName;
         this.publishDate = publishDate;
-        this.lendingList = lendingList;
+        this.lendingList=new ArrayList<>();
     }
     public BookDTO(){}
 

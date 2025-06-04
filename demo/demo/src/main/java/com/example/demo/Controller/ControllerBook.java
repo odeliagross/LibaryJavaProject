@@ -18,7 +18,7 @@ public class ControllerBook {
 
 
     @GetMapping("/getAllBooks/")
-    public List<Book> getAll()
+    public List<BookDTO> getAll()
     {
         return service.findAll();
     }
@@ -34,7 +34,7 @@ public class ControllerBook {
     }
 
     @GetMapping("/getBookById/{id}")
-    public Book getBookById(@PathVariable Integer id){return service.findById(id);}
+    public BookDTO getBookById(@PathVariable Integer id){return service.findById(id);}
 
     @PatchMapping("/updateBook/{id}")
     public boolean update(@PathVariable Integer id, @RequestBody Book book) {return service.update(id,book); }

@@ -14,13 +14,7 @@ public class LendingDTO {
     private LocalDate lendingDate;
     private boolean returned;
 
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
-    }
 
-    public void setBookId(Integer bookId) {
-        this.bookId = bookId;
-    }
 
     public void setLendingDate(LocalDate lendingDate) {
         this.lendingDate = lendingDate;
@@ -28,14 +22,6 @@ public class LendingDTO {
 
     public void setReturned(boolean returned) {
         this.returned = returned;
-    }
-
-    public String getCustomerId() {
-        return customerId;
-    }
-
-    public Integer getBookId() {
-        return bookId;
     }
 
     public LocalDate getLendingDate() {
@@ -46,10 +32,29 @@ public class LendingDTO {
         return returned;
     }
 
-    public LendingDTO(String customerId, Integer bookId, LocalDate lendingDate, boolean returned) {
+    public LendingDTO(){}
+
+
+    public String getCustomerId() {
+        return customerId;
+    }
+
+    public Integer getBookId() {
+        return bookId;
+    }
+
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
+    }
+
+    public void setBookId(Integer bookId) {
+        this.bookId = bookId;
+    }
+
+    public LendingDTO(String customerId, Integer bookId) {
         this.customerId = customerId;
         this.bookId = bookId;
-        this.lendingDate = lendingDate;
-        this.returned = returned;
+        this.lendingDate = LocalDate.now();
+        this.returned = false;
     }
 }

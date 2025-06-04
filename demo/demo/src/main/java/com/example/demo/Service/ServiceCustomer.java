@@ -1,5 +1,8 @@
 package com.example.demo.Service;
 
+import com.example.demo.DTO.BookDTO;
+import com.example.demo.DTO.CustomerDTO;
+import com.example.demo.ModelsEntity.Book;
 import com.example.demo.ModelsEntity.Customer;
 import com.example.demo.Repository.RepCostumer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +20,11 @@ public class ServiceCustomer {
     public ServiceCustomer(RepCostumer rep){this.rep=rep;}
 
     //שליפת כל הלקוחות
-    public List<Customer> findAll() {return (List<Customer>) rep.findAll();}
+    public List<CustomerDTO> findAll() {
+        return ((List<Customer>) rep.findAll()).stream()
+                .map(this::mapToDTO)
+                .toList();
+    }
 
     //הוספת לקוח
     public boolean addCustomer(Customer customer)
@@ -36,14 +43,23 @@ public class ServiceCustomer {
     }
 
     //קבלת לקוח לפי תעודת זהות
-    public Customer getCustomerById(String id)
+    public CustomerDTO getCustomerById(String id)
     {
         for(Customer cos:(List<Customer>) rep.findAll())
         {
             if(cos.getId().equals(id))
-                return cos;
+                return mapToDTO(cos);
         }
         return null;
+    }
+
+    //מיפוי
+    private CustomerDTO mapToDTO(Customer customer) {
+        CustomerDTO dto = new CustomerDTO();
+        dto.setFirstName(customer.getFirstName());
+        dto.setLastName(customer.getLastName());
+        dto.setPhone(customer.getPhone());
+        return dto;
     }
 
 

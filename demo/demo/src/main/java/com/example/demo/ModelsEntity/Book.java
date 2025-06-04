@@ -3,6 +3,7 @@ package com.example.demo.ModelsEntity;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -16,8 +17,8 @@ public class Book {
     private String bookName;
     private LocalDate publishDate;
 
-    @OneToMany (mappedBy = "book")
-    List<Lending> lendingList;
+    @OneToMany (mappedBy = "book",fetch = FetchType.EAGER)
+    private List<Lending> lendingList=new ArrayList<>();
 
     @Version
     private Integer version;
@@ -31,6 +32,21 @@ public class Book {
         this.publishDate=publishDate;
     }
 
+    public void setLendingList(List<Lending> lendingList) {
+        this.lendingList = lendingList;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
+
+    public List<Lending> getLendingList() {
+        return lendingList;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
 
     public Integer getId() {
         return id;
