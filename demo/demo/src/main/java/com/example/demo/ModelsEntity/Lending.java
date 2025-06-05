@@ -49,6 +49,10 @@ public class Lending {
         return lendingDate;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
     public boolean isReturned() {
         return returned;
     }

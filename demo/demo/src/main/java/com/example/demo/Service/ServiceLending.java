@@ -105,6 +105,7 @@ public class ServiceLending {
     //מיפוי
     private LendingDTO mapToDTO(Lending lending) {
         LendingDTO dto = new LendingDTO();
+        dto.setId(lending.getId());
         dto.setLendingDate(lending.getLendingDate());
         dto.setReturned(lending.isReturned());
 

@@ -9,6 +9,7 @@ import java.time.LocalDate;
 
 public class LendingDTO {
 
+    private Integer id;
     private String customerId;
     private Integer bookId;
     private LocalDate lendingDate;
@@ -45,6 +46,14 @@ public class LendingDTO {
 
     public void setCustomerId(String customerId) {
         this.customerId = customerId;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     public void setBookId(Integer bookId) {

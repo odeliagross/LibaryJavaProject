@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class ControllerBook {
@@ -28,16 +30,11 @@ public class ControllerBook {
         return service.add(book);
     }
 
-    @DeleteMapping("/deleteBook/")
-    public boolean delete(@RequestBody Book book) {
-        return service.delete(book);
-    }
-
     @GetMapping("/getBookById/{id}")
     public BookDTO getBookById(@PathVariable Integer id){return service.findById(id);}
 
     @PatchMapping("/updateBook/{id}")
-    public boolean update(@PathVariable Integer id, @RequestBody Book book) {return service.update(id,book); }
+    public boolean update(@PathVariable Integer id, @RequestBody Map<String,String> name) {return service.update(id,name.get("bookName")); }
 
     @GetMapping("/findBookByName/{name}")
     public List<BookDTO> findByName(@PathVariable String name){return service.findByName(name);}

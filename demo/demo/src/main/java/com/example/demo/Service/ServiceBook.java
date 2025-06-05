@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -44,14 +45,6 @@ public class ServiceBook{
         return true;
     }
 
-    public boolean delete(Book book)
-    {
-        if(!rep.existsById(book.getId()))
-            return false;
-        rep.deleteById(book.getId());
-        return true;
-    }
-
     public BookDTO findById(Integer id)
     {
         for (Book book : (List<Book>) rep.findAll()) {
@@ -61,13 +54,13 @@ public class ServiceBook{
         return null;
     }
 
-    public boolean update(Integer id, Book book)
+    public boolean update(Integer id,String name)
     {
         Optional<Book> optBook = rep.findById(id);
         if(optBook.isEmpty())
             return false;
         Book foundBook=optBook.get();
-        foundBook.setBookName(book.getBookName());
+        foundBook.setBookName(name);
         rep.save(foundBook);
         return true;
     }
@@ -99,6 +92,7 @@ public class ServiceBook{
     //מיפוי
     private BookDTO mapToDTO(Book book) {
         BookDTO dto = new BookDTO();
+        dto.setId(book.getId());
         dto.setBookName(book.getBookName());
         dto.setPublishDate(book.getPublishDate());
         List<LocalDate> lendingDates = new ArrayList<>();

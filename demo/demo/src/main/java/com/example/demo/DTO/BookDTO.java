@@ -6,6 +6,7 @@ import java.util.List;
 
 public class BookDTO {
 
+    private Integer id;
     private String bookName;
     private LocalDate publishDate;
     private List<LocalDate> lendingList;
@@ -15,6 +16,15 @@ public class BookDTO {
         this.publishDate = publishDate;
         this.lendingList=new ArrayList<>();
     }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
     public BookDTO(){}
 
     public void setBookName(String bookName) {
